@@ -8,11 +8,12 @@
   ],
   "scripts": {
     "build": "babel lib --out-dir dist",
-    "clean": "rimraf dist",
-    "lint": "eslint lib",
     "check": "npm run lint && npm run test",
-    "test": "mocha --compilers js:babel-register 'test/**/*.test.js'",
-    "prepublishOnly": "npm run check"
+    "clean": "rimraf dist",
+    "codecov": "babel-node ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec 'test/**/*.test.js' && codecov",
+    "lint": "eslint lib",
+    "prepublishOnly": "npm run check",
+    "test": "mocha --compilers js:babel-register 'test/**/*.test.js'"
   },
   "repository": {
     "type": "git",
@@ -52,9 +53,11 @@
     "babel-register": "^6.18.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
+    "codecov": "^1.0.1",
     "eslint": "^3.10.1",
     "eslint-config-beardon": "^2.0.0",
     "eslint-plugin-import": "^2.2.0",
+    "istanbul": "^0.4.5",
     "mocha": "^3.1.2",
     "rimraf": "^2.5.4",
     "sinon": "^1.17.6"
