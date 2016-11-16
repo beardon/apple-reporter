@@ -1,6 +1,8 @@
 # apple-reporter
 
-[![Build Status](https://travis-ci.org/beardon/apple-reporter.svg?branch=master)](https://travis-ci.org/beardon/apple-reporter) ![Dependencies](https://david-dm.org/beardon/apple-reporter.svg)
+[![Build Status](https://travis-ci.org/beardon/apple-reporter.svg?branch=master)](https://travis-ci.org/beardon/apple-reporter)
+![Dependencies](https://david-dm.org/beardon/apple-reporter.svg)
+[![codecov.io](http://codecov.io/github/beardon/apple-reporter/coverage.svg?branch=master)](http://codecov.io/github/beardon/apple-reporter?branch=master)
 
 Promise-based [Apple iTunes Connect Reporter](http://help.apple.com/itc/appsreporterguide) for Node.js > 4.2.0.
 
