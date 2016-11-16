@@ -3,3 +3,5 @@ node_js:
   - 7
   - "6.9"
   - "4.2"
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
