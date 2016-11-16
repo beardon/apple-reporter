@@ -1,5 +1,7 @@
 # apple-reporter
 
+[![Build Status](https://travis-ci.org/beardon/apple-reporter.svg?branch=master)](https://travis-ci.org/beardon/apple-reporter)
+
 Promise-based [Apple iTunes Connect Reporter](http://help.apple.com/itc/appsreporterguide) for Node.js > 4.2.0.
 
 Results are automagically ungzipped. In `Robot.XML` mode (which is default), the XML is parsed into an object using [xml2js](https://www.npmjs.com/package/xml2js). Errors result in a Promise rejection with best effort to set the `code` and `message` properties. Setting the `code` is not possible for text mode. (`code` defaults to -1)
