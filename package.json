@@ -10,10 +10,10 @@
     "build": "babel lib --out-dir dist",
     "check": "npm run lint && npm run test",
     "clean": "rimraf dist",
-    "codecov": "babel-node ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha --report lcovonly -- -R spec 'test/**/*.test.js' && codecov",
+    "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "lint": "eslint lib",
     "prepublishOnly": "npm run check",
-    "test": "mocha --compilers js:babel-register 'test/**/*.test.js'"
+    "test": "nyc mocha -R spec --compilers js:babel-register 'test/**/*.test.js'"
   },
   "repository": {
     "type": "git",
@@ -47,7 +47,6 @@
     "xml2js": "^0.4.17"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-preset-env": "^0.0.8",
     "babel-register": "^6.18.0",
@@ -57,8 +56,8 @@
     "eslint": "^3.10.1",
     "eslint-config-beardon": "^2.0.0",
     "eslint-plugin-import": "^2.2.0",
-    "istanbul": "^0.4.5",
     "mocha": "^3.1.2",
+    "nyc": "^9.0.1",
     "rimraf": "^2.5.4",
     "sinon": "^1.17.6"
   }
