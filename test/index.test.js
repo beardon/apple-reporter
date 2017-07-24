@@ -12,10 +12,10 @@ const AppleReporterError = require('../lib/errors').AppleReporterError;
 const Reporter = require('../lib/index');
 
 const userid = 'gy';
-const password = 'sucks';
+const accesstoken = 'itunesconnect-access-token';
 
 describe('Reporter', function () {
-    const reporter = new Reporter({ userid, password });
+    const reporter = new Reporter({ userid, accesstoken });
 
     it('should correctly set config defaults', function () {
         expect(reporter).to.have.property('config');
@@ -49,7 +49,7 @@ describe('Reporter', function () {
                 'https://reportingitc-reporter.apple.com/reportservice/sales/v1',
                 {
                     method: 'POST',
-                    body: 'jsonRequest={"userid":"gy","password":"sucks","version":"1.0","mode":"Robot.XML","queryInput":"[p=Reporter.properties, Sales.getReport, 123456,Sales,Summary,Weekly,20150208]"}',
+                    body: 'jsonRequest={"userid":"gy","accesstoken":"itunesconnect-access-token","version":"1.0","mode":"Robot.XML","queryInput":"[p=Reporter.properties, Sales.getReport, 123456,Sales,Summary,Weekly,20150208]"}',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
