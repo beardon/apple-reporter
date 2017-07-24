@@ -27,7 +27,7 @@ const AppleReporter = require('apple-reporter');
 
 const reporter = new AppleReporter({
     userid: 'gy',
-    password: 'sucks'
+    accesstoken: 'your-itunesconnect-access-token'
 });
 ```
 
@@ -69,7 +69,7 @@ Refer to [Apple's documentation](http://help.apple.com/itc/appsreporterguide) fo
   - `baseUrl`: Base endpoint for the API (defaults to `https://reportingitc-reporter.apple.com/reportservice`)
   - `financeUrl`: Finance endpoint URL (defaults to `/finance/v1`)
   - `mode`: Either `Normal` or `Robot.XML` (defaults to `Robot.XML`)
-  - `password`: iTunes Connect account password
+  - `accesstoken`: iTunes Connect access token
   - `salesUrl`: Sales endpoint URL (defaults to `/sales/v1`)
   - `userid`: iTunes Connect account user ID
   - `version`: The API version (defaults to `1.0`)
