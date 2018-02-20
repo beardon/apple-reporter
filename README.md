@@ -22,42 +22,82 @@ yarn add apple-reporter
 
 ### Initialization
 
+You can initialize an `AppleReporter` with an access token or the account password.
+
 ```js
 const AppleReporter = require('apple-reporter');
 
 const reporter = new AppleReporter({
-    userid: 'gy',
-    accesstoken: 'your-itunesconnect-access-token'
+    userid: 'your-itunesocnnect-userid',
+    accesstoken: 'your-itunesconnect-access-token',
+});
+
+// OR:
+const reporter = new AppleReporter({
+    userid: 'your-itunesocnnect-userid',
+    password: 'your-itunesconnect-account-password',
 });
 ```
+If you supply a **password**, note that an access token **is still required** to fetch data.
+However, supplying a password allows you to call `reporter.retrieveAccessToken()` to automatically retrieve and set the access token for the account:
+
+```js
+const AppleReporter = require('apple-reporter');
+
+const reporter = new AppleReporter({
+    userid: 'your-itunesocnnect-userid',
+    password: 'your-itunesconnect-account-password',
+});
+
+reporter.retrieveAccessToken()
+.then(({ token }) => {
+    console.log(`The account access token is ${token}`);
+    
+    // Other methods will now work (see 'Usage' section)
+})
+```
+
+`retrieveAccessToken()` will normally throw an error if your account does not have an access token, or the access token is expired.
+However, if called with the optional `generateNewIfNeeded: true`, a new access code will simply be generated in these scenarios:
+
+```js
+reporter.retrieveAccessToken({ generateNewIfNeeded: true })
+.then(({ token, isNew }) => {
+    console.log(`Token: ${token}, was newly generated: ${isNew}`);
+    
+    // Other API methods will now work (see 'Usage' section)
+})
+```
+
+If you supply an access token to begin with, you do not need to call this method before using the rest of the library.
 
 ### Usage
 
-```js
-function getFinanceReport() {
-    return reporter.Finance.getStatus().then((status) => {
-        return reporter.Finance.getReport({
-            vendorNumber: 123456,
-            regionCode: 'US',
-            reportType: 'Financial',
-            fiscalYear: '2015',
-            fiscalPeriod: '02'
-        })
-        .then((report) => {
-            // do stuff with report...
-        })
-        .catch((err) => {
-            // uh-oh!
-            console.error('Unable to get Finance report!');
+Example:
 
-            throw err;
-        });
-    }, (err) => {
-        console.error('Finance is down!');
+```js
+reporter.Finance.getStatus().then((status) => {
+    return reporter.Finance.getReport({
+        vendorNumber: 123456,
+        regionCode: 'US',
+        reportType: 'Financial',
+        fiscalYear: '2015',
+        fiscalPeriod: '02'
+    })
+    .then((report) => {
+        // do stuff with report...
+    })
+    .catch((err) => {
+        // uh-oh!
+        console.error('Unable to get Finance report!');
 
         throw err;
     });
-}
+}, err => {
+    console.error('Finance is down!');
+
+    throw err;
+});  
 ```
 
 ## API
@@ -70,6 +110,7 @@ Refer to [Apple's documentation](http://help.apple.com/itc/appsreporterguide) fo
   - `financeUrl`: Finance endpoint URL (defaults to `/finance/v1`)
   - `mode`: Either `Normal` or `Robot.XML` (defaults to `Robot.XML`)
   - `accesstoken`: iTunes Connect access token
+  - `password`: iTunes Connect account password
   - `salesUrl`: Sales endpoint URL (defaults to `/sales/v1`)
   - `userid`: iTunes Connect account user ID
   - `version`: The API version (defaults to `1.0`)
