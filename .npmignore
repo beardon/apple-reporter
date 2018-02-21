@@ -1,0 +1,12 @@
+# Intellij
+.idea
+*.iml
+
+# Node.js
+node_modules
+yarn.lock
+coverage
+coverage.lcov
+.nyc_output
+
+# Don't ignore dist in this file, so that the built contents are published
