@@ -52,24 +52,41 @@ const reporter = new AppleReporter({
 reporter.retrieveAccessToken()
 .then(({ token }) => {
     console.log(`The account access token is ${token}`);
-    
+
     // Other methods will now work (see 'Usage' section)
 })
 ```
 
-`retrieveAccessToken()` will normally throw an error if your account does not have an access token, or the access token is expired.
-However, if called with the optional `generateNewIfNeeded: true`, a new access code will simply be generated in these scenarios:
+Normally, `retrieveAccessToken()` will throw an error if your account does not have an access token, or the access token is expired.
+In addition, in the case that an access token has already been retrieved (or given), it will simply return it without re-fetching.
+This behavior can be overidden with options:
+
+```js
+reporter.retrieveAccessToken({
+    // Pass this to generate a new token anyway in the case that
+    // one doesn't exist or is expired
+    generateNewIfNeeded: true
+
+    // Pass this to force re-fetching the account access token,
+    // even if one is already set
+    forceRetrieve: true
+})
+.then(...)
+```
+
+`retrieveAccessToken()` resolves to an object containing the token and a boolean indicating if it was newly generated or not:
 
 ```js
 reporter.retrieveAccessToken({ generateNewIfNeeded: true })
 .then(({ token, isNew }) => {
     console.log(`Token: ${token}, was newly generated: ${isNew}`);
-    
+
     // Other API methods will now work (see 'Usage' section)
 })
 ```
 
 If you supply an access token to begin with, you do not need to call this method before using the rest of the library.
+In the case that you only supply a password, the rest of the API will not work until this method has been called.
 
 ### Usage
 
