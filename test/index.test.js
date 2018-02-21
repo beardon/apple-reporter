@@ -49,7 +49,7 @@ describe('Reporter', function () {
                 'https://reportingitc-reporter.apple.com/reportservice/sales/v1',
                 {
                     method: 'POST',
-                    body: 'jsonRequest={"userid":"gy","accesstoken":"itunesconnect-access-token","version":"1.0","mode":"Robot.XML","queryInput":"[p=Reporter.properties, Sales.getReport, 123456,Sales,Summary,Weekly,20150208]"}',
+                    body: 'jsonRequest={"userid":"gy","version":"1.0","mode":"Robot.XML","queryInput":"[p=Reporter.properties, Sales.getReport, 123456,Sales,Summary,Weekly,20150208]","accesstoken":"itunesconnect-access-token"}',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
