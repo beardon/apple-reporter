@@ -13,6 +13,7 @@ const Reporter = require('../lib/index');
 
 const userid = 'gy';
 const accesstoken = 'itunesconnect-access-token';
+const password = 'itunesconnect-account-password';
 
 describe('Reporter', function () {
     const reporter = new Reporter({ userid, accesstoken });
@@ -306,5 +307,31 @@ describe('Reporter', function () {
                 expect(reporter.Finance.getVersion()).to.eventually.equal('1.0');
             });
         });
+    });
+
+    it('should have retrieveAccessToken', function () {
+        expect(reporter.retrieveAccessToken).to.be.a('function');
+    });
+
+    const reporterWithNoAuth = new Reporter({ userid });
+    const reporterWithPassword = new Reporter({ userid, password });
+    const reporterWithToken = new Reporter({ userid, accesstoken });
+
+    describe('retrieveAccessToken', function () {
+
+        it('should throw if no password or access code supplied', function () {
+            expect(() => reporterWithNoAuth.retrieveAccessToken()).to.throw();
+        });
+
+        it('should not throw if access token already supplied', function () {
+            expect(() => reporterWithToken.retrieveAccessToken()).to.not.throw();
+        });
+
+        it('should throw if forceRetrieve is set but not password was supplied', function () {
+            expect(() => reporterWithToken.retrieveAccessToken({ forceRetrieve: true })).to.throw();
+        });
+
+        // TODO: Test the actual behavior
+
     });
 });
