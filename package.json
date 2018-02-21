@@ -13,7 +13,7 @@
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
     "lint": "eslint lib",
     "prepublishOnly": "npm run check",
-    "test": "nyc mocha -R spec --compilers js:babel-register 'test/**/*.test.js'"
+    "test": "nyc mocha -R spec --compilers js:babel-register -- test/**/*.test.js"
   },
   "repository": {
     "type": "git",
