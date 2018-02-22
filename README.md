@@ -49,35 +49,39 @@ const reporter = new AppleReporter({
     password: 'your-itunesconnect-account-password',
 });
 
-reporter.retrieveAccessToken()
-.then(({ token }) => {
-    console.log(`The account access token is ${token}`);
-
+reporter.retrieveAccessToken(options) // See below
+.then(() => {
     // Other methods will now work (see 'Usage' section)
 })
 ```
 
-Normally, `retrieveAccessToken()` will throw an error if your account does not have an access token, or the access token is expired.
-In addition, in the case that an access token has already been retrieved (or given), it will simply return it without re-fetching.
-This behavior can be overidden with options:
+`retrieveAccessToken()` takes an options object, which defaults to the following:
 
 ```js
 reporter.retrieveAccessToken({
-    // Pass this to generate a new token anyway in the case that
-    // one doesn't exist or is expired
-    generateNewIfNeeded: true
+    // Normally, once this method is called and the access token
+    // is set, subsequent calls to this method will just return
+    // the access code retrieved earlier, instead of re-fetching
+    forceRetrieve: false,
+    // Set this to true to force re-fetching of the access token
 
-    // Pass this to force re-fetching the account access token,
-    // even if one is already set
-    forceRetrieve: true
+    // Normally, if there is no access token or one is expired,
+    // no new token will be generated without explicit permission
+    generateNewIfNeeded: false,
+    // Setting this to true grants that explicit permission
 })
 .then(...)
 ```
 
+**The most common way to use this method** is with both of these options set: `retrieveAccessToken({ forceRetrieve: true, generateNewIfNeeded: true})`.
+This ensures that the access token will be refreshed on every call and, in case it expires, generated anew.
+**Note** in particular, that if you never set `forceRetrieve`, you will not know when your token is expired.
+This is left as an option in case you want to optimize your application by, say, managing the access token timeframe yourself and checking the token less frequently.
+
 `retrieveAccessToken()` resolves to an object containing the token and a boolean indicating if it was newly generated or not:
 
 ```js
-reporter.retrieveAccessToken({ generateNewIfNeeded: true })
+reporter.retrieveAccessToken({ forceRetrieve: true, generateNewIfNeeded: true })
 .then(({ token, isNew }) => {
     console.log(`Token: ${token}, was newly generated: ${isNew}`);
 
