@@ -78,6 +78,21 @@ This ensures that the access token will be refreshed on every call and, in case 
 **Note** in particular, that if you never set `forceRetrieve`, you will not know when your token is expired.
 This is left as an option in case you want to optimize your application by, say, managing the access token timeframe yourself and checking the token less frequently.
 
+If you'll always use the same options, they can also be passed in the config at initialization:
+
+```js
+const reporter = new AppleReporter({
+    userid: 'your-itunesocnnect-userid',
+    password: 'your-itunesconnect-account-password',
+    tokenOptions: {
+        forceRetrieve: true,
+        generateNewIfNeeded: true
+    }
+});
+```
+
+These will be used if no options are passed to `retrieveAccessToken()`, but options passed to the method will always take precedence.
+
 `retrieveAccessToken()` resolves to an object containing the token and a boolean indicating if it was newly generated or not:
 
 ```js
