@@ -1,6 +1,6 @@
 {
   "name": "apple-reporter",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "Promise-based Apple iTunes Connect Reporter",
   "main": "dist/index.js",
   "files": [
