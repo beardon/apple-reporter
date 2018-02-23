@@ -135,6 +135,9 @@ Refer to [Apple's documentation](http://help.apple.com/itc/appsreporterguide) fo
   - `salesUrl`: Sales endpoint URL (defaults to `/sales/v1`)
   - `userid`: iTunes Connect account user ID
   - `version`: The API version (defaults to `1.0`)
+  - `tokenOptions`: (object) The options object used in `retrieveAccessToken()`, if none is passed to the method
+    - `forceRetrieve`: Actually make an API call to retrieve the token, even if one is already set (defaults to `false`)
+    - `generateNewIfNeeded`: Generate a new token automatically if it is found to be expired or non-existent (defaults to `false`)
 
 ### General
 - [getVersion](https://help.apple.com/itc/appsreporterguide/#/itc7e183be3b)
