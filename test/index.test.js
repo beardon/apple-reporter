@@ -25,6 +25,9 @@ describe('Reporter', function () {
         expect(reporter.config).to.have.property('mode', 'Robot.XML');
         expect(reporter.config).to.have.property('salesUrl', '/sales/v1');
         expect(reporter.config).to.have.property('version', '1.0');
+        expect(reporter.config).to.have.property('tokenOptions');
+        expect(reporter.config.tokenOptions).to.have.property('forceRetrieve', false);
+        expect(reporter.config.tokenOptions).to.have.property('generateNewIfNeeded', false);
     });
 
     describe('getVersion', function () {
