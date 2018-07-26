@@ -2,9 +2,9 @@
   "name": "apple-reporter",
   "version": "2.2.0",
   "description": "Promise-based Apple iTunes Connect Reporter",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "files": [
-    "dist"
+    "lib"
   ],
   "scripts": {
     "build": "babel lib --out-dir dist",
