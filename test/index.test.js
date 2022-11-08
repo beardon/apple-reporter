@@ -201,7 +201,7 @@ describe('Reporter', function () {
 
                 const request = reporter.Sales.getAccounts();
 
-                expect(stub.firstCall.args).to.eql(['/sales/v1', 'Sales.getAccounts']);
+                expect(stub.firstCall.args).to.eql(['/sales/v1', 'Sales.getAccounts', { account: undefined }]);
             }));
         });
 
@@ -211,7 +211,7 @@ describe('Reporter', function () {
 
                 const request = reporter.Sales.getStatus();
 
-                expect(stub.firstCall.args).to.eql(['/sales/v1', 'Sales.getStatus']);
+                expect(stub.firstCall.args).to.eql(['/sales/v1', 'Sales.getStatus', { account: undefined }]);
             }));
         });
 
@@ -221,7 +221,7 @@ describe('Reporter', function () {
 
                 const request = reporter.Sales.getVendors();
 
-                expect(stub.firstCall.args).to.eql(['/sales/v1', 'Sales.getVendors']);
+                expect(stub.firstCall.args).to.eql(['/sales/v1', 'Sales.getVendors', { account: undefined }]);
             }));
         });
 
@@ -237,7 +237,7 @@ describe('Reporter', function () {
                     date: '20150208'
                 });
 
-                expect(stub.firstCall.args).to.eql(['/sales/v1', 'Sales.getReport, 123456,Sales,Summary,Weekly,20150208']);
+                expect(stub.firstCall.args).to.eql(['/sales/v1', 'Sales.getReport, 123456,Sales,Summary,Weekly,20150208', { account: undefined }]);
             }));
         });
 
@@ -265,7 +265,7 @@ describe('Reporter', function () {
 
                 const request = reporter.Finance.getAccounts();
 
-                expect(stub.firstCall.args).to.eql(['/finance/v1', 'Finance.getAccounts']);
+                expect(stub.firstCall.args).to.eql(['/finance/v1', 'Finance.getAccounts', { account: undefined }]);
             }));
         });
 
@@ -275,7 +275,7 @@ describe('Reporter', function () {
 
                 const request = reporter.Finance.getStatus();
 
-                expect(stub.firstCall.args).to.eql(['/finance/v1', 'Finance.getStatus']);
+                expect(stub.firstCall.args).to.eql(['/finance/v1', 'Finance.getStatus', { account: undefined }]);
             }));
         });
 
@@ -283,9 +283,9 @@ describe('Reporter', function () {
             it('should have correct parameters', sinon.test(function () {
                 const stub = this.stub(reporter, 'fetch');
 
-                const request = reporter.Finance.getVendorsAndRegions();
+                const request = reporter.Finance.getVendorsAndRegions({}, { account: 654321 });
 
-                expect(stub.firstCall.args).to.eql(['/finance/v1', 'Finance.getVendorsAndRegions']);
+                expect(stub.firstCall.args).to.eql(['/finance/v1', 'Finance.getVendorsAndRegions', { account: 654321 }]);
             }));
         });
 
@@ -301,7 +301,7 @@ describe('Reporter', function () {
                     fiscalPeriod: '02'
                 });
 
-                expect(stub.firstCall.args).to.eql(['/finance/v1', 'Finance.getReport, 123456,US,Financial,2015,02']);
+                expect(stub.firstCall.args).to.eql(['/finance/v1', 'Finance.getReport, 123456,US,Financial,2015,02', { account: undefined }]);
             }));
         });
 
